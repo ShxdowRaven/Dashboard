@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <header align = "center"> <h1> Shxdow's Dashboard </h1> </header>
+    <title> Shxdow's Dashboard </title>
+    <meta charset = "utf-8">
+    <meta name = "ShxdowRaven" content = "">
+    <meta name = "My personal dashboard" content = "">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+
+</head>
+
+<body>
+	<div style = "text-align: center;">
+		<div style = "display: inline-block;">
+			<p id = "city" style = "float: left; padding: 10px"> </p>
+			<img id = "img" style = "float: left; padding: 10px"> </img>
+			<p id = "desc" style = "float: left; padding: 10px"> </p>
+		</div>
+	<div>
+	<script src = "https://code.jquery.com/jquery-3.4.1.js"> </script>
+	
+	<script> 
+
+		wtrAPI = "http://api.openweathermap.org/data/2.5/weather?id=5907364&appid=a84b5fe0c3b770d93c14b622934d8069"
+		$.ajax({
+			dataType: "json",
+			url: wtrAPI,
+			success: function(weatherData) {
+				var city = weatherData.name;
+				var country = weatherData.sys.country;
+				var desc = weatherData.weather[0].description;
+				var icon = weatherData.weather[0].icon;
+				var temp = Math.round((weatherData.main.temp - 273.15) * 10) / 10
+				document.getElementById("city").innerHTML = city;
+				document.getElementById("img").src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+				document.getElementById("desc").innerHTML = temp + "°C with " + desc;
+				},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert(jqXHR.status);
+			}
+		});
+
+	</script>
+
+	<style>
+
+		h1 {
+			font-family: verdana;
+			font-size: 40px;
+		}
+
+		p {
+			font-family: verdana;
+			font-size: 30px;
+			text-align: center;
+		}
+
+		img {
+			background-color: rgb(225, 225, 225);
+		}
+
+	</style>
+
+</body>
+
+</html>
